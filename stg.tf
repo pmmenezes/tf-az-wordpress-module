@@ -34,7 +34,7 @@ resource "azurerm_storage_share" "nfs_share" {
   depends_on = [
     azurerm_storage_account_network_rules.sa
   ]
-    tags = local.tags_default
+
 
 }
 // https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone
