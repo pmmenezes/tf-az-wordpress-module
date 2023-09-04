@@ -22,7 +22,7 @@ resource "azurerm_storage_account_network_rules" "sa" {
   default_action     = "Deny"
   ip_rules           = ["${jsondecode(data.http.current_ip.response_body).ip}"]
   bypass             =   [ "Metrics", "Logging", "AzureServices",  ]
-  virtual_network_subnet_ids = [ azurerm_subnet.snet["vm"].id, azurerm_subnet.snet["ep"].id, azurerm_subnet.snet["db"].id ]
+  virtual_network_subnet_ids = [ azurerm_subnet.snets["vm"].id, azurerm_subnet.snets["ep"].id, azurerm_subnet.snets["db"].id ]
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_share
@@ -61,7 +61,7 @@ resource "azurerm_private_endpoint" "storage_share_endpoint" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = "East US 2"
   name                = "pep-webserver-pablo-dev-eastus2"
-  subnet_id           = azurerm_subnet.ep.id
+  subnet_id           = azurerm_subnet.snets["ep"].id
   tags = local.tags_default
 
 
