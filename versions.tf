@@ -9,8 +9,8 @@ terraform {
       source  = "hashicorp/http"
       version = "3.4.0"
     }
-      random = {
-      source = "hashicorp/random"
+    random = {
+      source  = "hashicorp/random"
       version = "~> 3.5.1"
     }
 
