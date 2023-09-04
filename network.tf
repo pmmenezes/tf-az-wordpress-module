@@ -12,7 +12,7 @@ locals {
     db = { address_prefixes = ["10.0.3.0/24"], service_endpoints = ["Microsoft.Storage"], service_delegations = {
       mysqlfs = {
         "Microsoft.DBforMySQL/flexibleServers" = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
-      }
+      },
       },
   } }
 }
@@ -31,10 +31,9 @@ resource "azurerm_subnet" "snets" {
         name = delegation.key
         dynamic "service_delegation" {
           for_each = delegation.value
-          interator = item
           content {
-            name = item.key
-            actions = item.value
+            name = service_delegation.key
+            actions = service_delegation.value
           }
         }
     }
