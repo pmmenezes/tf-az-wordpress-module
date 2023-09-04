@@ -13,7 +13,7 @@ locals {
       mysqlfs = {
         "Microsoft.DBforMySQL/flexibleServers" = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
       }
-      }
+      },
   } }
 }
 
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "snets" {
     }
     }    
   }
-}
+
 
 
 #resource "azurerm_subnet" "vm" {
