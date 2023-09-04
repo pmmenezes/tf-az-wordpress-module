@@ -63,12 +63,13 @@ resource "azurerm_private_endpoint" "storage_share_endpoint" {
   name                = "pep-webserver-pablo-dev-eastus2"
   subnet_id           = azurerm_subnet.ep.id
   tags = var.tags_default
-}
+
 
   private_dns_zone_group {
     name                 = "private-dns-zone-group"
     private_dns_zone_ids = [azurerm_private_dns_zone.storage_share_private_zone.id]
   }
+
 
   private_service_connection {
     name                           = azurerm_storage_account.sa.name
@@ -76,3 +77,4 @@ resource "azurerm_private_endpoint" "storage_share_endpoint" {
     is_manual_connection           = false
     subresource_names              = ["file"]
   }
+}
