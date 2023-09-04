@@ -20,6 +20,7 @@ locals {
 resource "azurerm_subnet" "snets" {
   for_each = local.subnets
   name = "snet-${each.key}-${local.resource_name}"
+  address_prefixes = each.value.address_prefixes
   resource_group_name                       = azurerm_resource_group.rg.name
   virtual_network_name                      = azurerm_virtual_network.vnet.name
   service_endpoints = try(each.value.service_endpoints, [])
@@ -29,7 +30,7 @@ resource "azurerm_subnet" "snets" {
     content {
         name = delegation.key
         dynamic "service_delegation" {
-          for_each = delefation.value
+          for_each = delegation.value
           interator = item
           content {
             name = item.key
@@ -112,7 +113,7 @@ resource "azurerm_network_security_rule" "allow_http" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg" {
-  subnet_id                 = azurerm_subnet.vm.id
+  subnet_id                 = azurerm_subnet.snets.0.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
