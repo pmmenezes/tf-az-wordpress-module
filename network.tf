@@ -37,6 +37,7 @@ resource "azurerm_subnet" "snets" {
             actions = item.value
           }
         }
+    }
     }    
   }
 }
