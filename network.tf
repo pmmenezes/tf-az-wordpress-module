@@ -1,6 +1,6 @@
 resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
-  location            = var.regiao
+  location            = var.region
   address_space       = var.cidr
   name                = "vnet-${local.resource_name}"
 }
@@ -78,7 +78,7 @@ resource "azurerm_subnet" "snets" {
 resource "azurerm_network_security_group" "nsg" {
   name                = "nsg-pablo-dev-eastus2"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = var.regiao
+  location            = var.region
 }
 
 resource "azurerm_network_security_rule" "allow_ssh" {
@@ -123,14 +123,14 @@ Bloco referente a configuração de loadbalance
 resource "azurerm_public_ip" "pip" {
   name                = "pip-pablo-dev-eastus2"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = var.regiao
+  location            = var.region
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
 resource "azurerm_lb" "lb" {
   name                = "lb-pablo-dev-eastus2"
-  location            = var.regiao
+  location            = var.region
   resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard"
   frontend_ip_configuration {
