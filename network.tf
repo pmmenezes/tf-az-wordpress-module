@@ -1,7 +1,6 @@
 resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.regiao
-  tags                = var.tags_padrao
   address_space       = var.cidr
   name                = "vnet-${local.resource_name}"
 }
@@ -80,7 +79,6 @@ resource "azurerm_network_security_group" "nsg" {
   name                = "nsg-pablo-dev-eastus2"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.regiao
-  tags                = var.tags_padrao
 }
 
 resource "azurerm_network_security_rule" "allow_ssh" {
@@ -128,7 +126,6 @@ resource "azurerm_public_ip" "pip" {
   location            = var.regiao
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags                = var.tags_padrao
 }
 
 resource "azurerm_lb" "lb" {
@@ -140,7 +137,6 @@ resource "azurerm_lb" "lb" {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.pip.id
   }
-  tags = var.tags_padrao
 }
 
 resource "azurerm_lb_backend_address_pool" "lb" {
