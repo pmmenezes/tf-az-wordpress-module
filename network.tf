@@ -113,7 +113,7 @@ resource "azurerm_network_security_rule" "allow_http" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg" {
-  subnet_id                 = azurerm_subnet.snets.0.id
+  subnet_id                 = azurerm_subnet.snets.*.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
