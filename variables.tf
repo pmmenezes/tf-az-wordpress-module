@@ -18,3 +18,9 @@ variable "project" {
 variable "trusted_ip" {
 type = list
 }
+variable "administrator_login" {
+  
+}
+variable "vm_type" {
+  default = "B_Standard_B1ms"
+}
