@@ -20,7 +20,7 @@ data "http" "current_ip" {
 resource "azurerm_storage_account_network_rules" "sa" {
   storage_account_id = azurerm_storage_account.sa.id
   default_action     = "Deny"
-  ip_rules           = ["${jsondecode(data.http.current_ip.response_body).ip}"]
+  ip_rules           = concat(var.trusted_ip ,["${jsondecode(data.http.current_ip.response_body).ip}"])
   bypass             =   [ "Metrics", "Logging", "AzureServices",  ]
   virtual_network_subnet_ids = [ azurerm_subnet.snets["vm"].id, azurerm_subnet.snets["ep"].id, azurerm_subnet.snets["db"].id ]
 }
