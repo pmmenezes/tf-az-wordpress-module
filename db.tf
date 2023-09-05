@@ -33,7 +33,7 @@ resource "azurerm_mysql_flexible_server" "db" {
   sku_name               = var.vm_type
 tags = local.tags_default
   depends_on = [azurerm_private_dns_zone_virtual_network_link.db]
-  zone = 2
+  zone = try(1,2)
 }
 
 resource "azurerm_mysql_flexible_server_configuration" "require_secure_transport" {
