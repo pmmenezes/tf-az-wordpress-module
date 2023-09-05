@@ -1,7 +1,7 @@
 
 //https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 resource "azurerm_storage_account" "sa" {
-  name                      = "sawebserver${lower(var.name)}"
+  name                      = "sawebserver${lower(var.name)${lower(var.env)}"
   resource_group_name       = azurerm_resource_group.rg.name
   location                  = var.region
   account_tier              = "Premium"
