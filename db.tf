@@ -7,7 +7,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "db" {
   resource_group_name = azurerm_resource_group.rg.name
   private_dns_zone_name = azurerm_private_dns_zone.db.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
-tags = local.tags_padrao
+tags = local.tags_default
 }
 
 resource "random_password" "pass_admin_db" {
@@ -31,7 +31,7 @@ resource "azurerm_mysql_flexible_server" "db" {
   delegated_subnet_id    = azurerm_subnet.snets["db"].id
   private_dns_zone_id    = azurerm_private_dns_zone.db.id
   sku_name               = var.vm_type
-tags = local.tags_padrao
+tags = local.tags_default
   depends_on = [azurerm_private_dns_zone_virtual_network_link.db]
   zone = 2
 }
