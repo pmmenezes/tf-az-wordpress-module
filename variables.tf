@@ -15,3 +15,6 @@ variable "cidr" {
 variable "project" {
   
 }
+variable "trusted_ip" {
+type = list
+}
