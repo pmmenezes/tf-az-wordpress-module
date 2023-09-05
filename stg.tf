@@ -59,8 +59,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "storage_share_private_
 // https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint
 resource "azurerm_private_endpoint" "storage_share_endpoint" {
   resource_group_name = azurerm_resource_group.rg.name
-  location            = "East US 2"
-  name                = "pep-webserver-pablo-dev-eastus2"
+  location            = var.region
+  name                = "pep-webserver-${local.resource_name}"
   subnet_id           = azurerm_subnet.snets["ep"].id
   tags = local.tags_default
 
